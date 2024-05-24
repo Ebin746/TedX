@@ -18,8 +18,10 @@ const signup = async (req, res, next) => {
 
         const userDetails = new UserDetails({ userId: user._id, tedXID, fullName, email, age });
         await userDetails.save();
-      
-        res.status(200).json({ message: "Successfully registered", userInfo });
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res  .cookie("access_token", token, {
+            httpOnly: true,
+          }).status(200).json({ message: "Successfully registered", userInfo});
     } catch (err) {
         next(err);
     }
@@ -48,7 +50,9 @@ const login=async (req, res,next) => {
         };
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ message:"success fully logined ",userInfo,token });
+        res.cookie("access_token", token, {
+            httpOnly: true,
+          }).json({ message:"success fully logined ",userInfo});
     } catch (err) {
  next(err)
     }
