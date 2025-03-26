@@ -1,5 +1,5 @@
 
-# 🌐 TedX Cusat App
+# 🌐 TedX backend
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://semver.org)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://example.com/build)
 
